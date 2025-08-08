@@ -33,7 +33,6 @@ app.use(session({
     resave:false,
     saveUninitialized:true,
     cookie: {
-    httpOnly: true,
       secure: true,
       sameSite: 'none',
     },
