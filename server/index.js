@@ -20,18 +20,20 @@ app.use(cors({
     credentials:true
 }))
 
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
+
 app.use(session({
     secret:'secret',
     resave:false,
     saveUninitialized:true,
     cookie: {
-      secure: true, // set to true if using HTTPS
-      sameSite: 'none', // important for cross-origin
+      secure: true,
+      sameSite: 'none',
     },
 }))
+app.use(express.json())
 app.use(cookieParser())
+app.use(express.urlencoded({extended:false}))
+
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -62,7 +64,7 @@ app.get('/auth/google/callback',
         failureRedirect:{FRONTEND_URL}
     }),
     googleAuth,
-    (req,res)=>{
+    async(req,res)=>{
         res.redirect(`${FRONTEND_URL}/home`)
     }
 )
