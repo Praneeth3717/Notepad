@@ -1,5 +1,5 @@
 const apis=()=>{
-    const local="http://localhost:5000/";
+    const local="https://notepad-u68d.onrender.com/";
     const list={
         userProfile:`${local}user/profile`,
         logout:`${local}user/logout`,
