@@ -17,16 +17,12 @@ dotenv.config()
 const app=express()
 app.set('trust proxy', 1);
 
-// app.use(cors({
-//     origin:FRONTEND_URL,
-//     credentials:true
-// }))
-
 app.use(cors({
-  origin: FRONTEND_URL,
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-}));
+    origin:FRONTEND_URL,
+    credentials:true
+}))
+
+
 
 app.use(session({
     secret:'secret',
@@ -41,6 +37,9 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
 
+app.get('/', (req, res) => {
+    res.send('Backend is alive ');
+});
 
 app.use(passport.initialize())
 app.use(passport.session())
