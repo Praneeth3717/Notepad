@@ -1,7 +1,7 @@
 import React from 'react'
 
 const login=()=>{
-    window.location.href="http://localhost:5000/auth/google"
+    window.location.href="https://notepad-u68d.onrender.com/auth/google"
 }
 
 const Login = () => {
