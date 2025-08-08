@@ -15,17 +15,25 @@ dotenv.config()
 
 
 const app=express()
-app.use(cors({
-    origin:{FRONTEND_URL},
-    credentials:true
-}))
+app.set('trust proxy', 1);
 
+// app.use(cors({
+//     origin:FRONTEND_URL,
+//     credentials:true
+// }))
+
+app.use(cors({
+  origin: FRONTEND_URL,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+}));
 
 app.use(session({
     secret:'secret',
     resave:false,
     saveUninitialized:true,
     cookie: {
+    httpOnly: true,
       secure: true,
       sameSite: 'none',
     },
@@ -61,7 +69,7 @@ app.get('/auth/google',passport.authenticate('google',{
 
 app.get('/auth/google/callback',
     passport.authenticate('google',{
-        failureRedirect:{FRONTEND_URL}
+        failureRedirect:FRONTEND_URL
     }),
     googleAuth,
     async(req,res)=>{
